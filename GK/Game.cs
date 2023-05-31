@@ -53,13 +53,13 @@ namespace GK
                     var num = int.Parse(line.Split()[0]);
                     var col = int.Parse(line.Split()[1]);
 
-                    MakeMove(null, 1, true, num - 1, col);
+                    MakeMove(null, player2Strategy, 1, true, num - 1, col);
                     ConsoleExtension.ClearLine();
 
                     Console.Write("Ruch gracza 2. Naciśnij dowolny klawisz aby kontynuować...");
                     Console.ReadKey(true);
                     ConsoleExtension.ClearLine();
-                    if (MakeMove(player2Strategy, 2, true) != MakeMoveResult.NoOneWon)
+                    if (MakeMove(player2Strategy, null, 2, true) != MakeMoveResult.NoOneWon)
                         return;
                 }
                 catch (Exception) { }
@@ -77,7 +77,7 @@ namespace GK
                 T.Add(new int[c + 1]);
         }
 
-        private MakeMoveResult MakeMove(IStrategy playingStrategy, int playingPlayer, bool demo, int? num = null, int? col = null)
+        private MakeMoveResult MakeMove(IStrategy playingStrategy, IStrategy notPlayingStrategy, int playingPlayer, bool demo, int? num = null, int? col = null)
         {
             var (number, color) = (0, 0);
             if (playingStrategy != null)
@@ -91,6 +91,8 @@ namespace GK
                 (number, color) = (num!.Value, col!.Value);
                 if (numbers[number] != 0)
                     throw new InvalidOperationException($"Tried to recolor number {number} from color {numbers[number]} to color {color}.");
+                // notPlayingStrategy is not null here
+                notPlayingStrategy.Update(number, color);
             }
 
 
