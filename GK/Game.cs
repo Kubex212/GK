@@ -46,18 +46,24 @@ namespace GK
             DisplayState();
             while (true)
             {
-                Console.Write("Ruch gracza 1. Wpisz ruch: {liczba} {kolor}");
-                var line = Console.ReadLine();
-                var num = int.Parse(line.Split()[0]);
-                var col = int.Parse(line.Split()[1]);
-                MakeMove(null, 0, true, num - 1, col);
-                ConsoleExtension.ClearLine();
+                try
+                {
+                    Console.Write("Ruch gracza 1. Wpisz ruch: {liczba} {kolor}\n");
+                    var line = Console.ReadLine()!;
+                    var num = int.Parse(line.Split()[0]);
+                    var col = int.Parse(line.Split()[1]);
 
-                Console.Write("Ruch gracza 2. Naciśnij dowolny klawisz aby kontynuować...");
-                Console.ReadKey(true);
-                ConsoleExtension.ClearLine();
-                if (MakeMove(player2Strategy, 2, true) != MakeMoveResult.NoOneWon)
-                    return;
+                    MakeMove(null, 1, true, num - 1, col);
+                    ConsoleExtension.ClearLine();
+
+                    Console.Write("Ruch gracza 2. Naciśnij dowolny klawisz aby kontynuować...");
+                    Console.ReadKey(true);
+                    ConsoleExtension.ClearLine();
+                    if (MakeMove(player2Strategy, 2, true) != MakeMoveResult.NoOneWon)
+                        return;
+                }
+                catch (Exception) { }
+                
             }
         }
 
@@ -83,6 +89,8 @@ namespace GK
             else
             {
                 (number, color) = (num!.Value, col!.Value);
+                if (numbers[number] != 0)
+                    throw new InvalidOperationException($"Tried to recolor number {number} from color {numbers[number]} to color {color}.");
             }
 
 

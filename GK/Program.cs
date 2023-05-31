@@ -1,11 +1,11 @@
 ﻿using GK;
 
-for (int i = 0; i < 15; i++)
-{
-    Console.ForegroundColor = (ConsoleColor)i;
+//for (int i = 0; i < 15; i++)
+//{
+//    Console.ForegroundColor = (ConsoleColor)i;
 
-    Console.WriteLine("Anty-van der Waerden\n");
-}
+//    Console.WriteLine("Anty-van der Waerden\n");
+//}
 
 int n;
 int k;
