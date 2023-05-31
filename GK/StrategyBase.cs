@@ -26,5 +26,6 @@ namespace GK
         }
 
         public abstract (int number, int color) MakeMove(IReadOnlyList<int> numbers);
+        public abstract void Update(int number, int color);
     }
 }

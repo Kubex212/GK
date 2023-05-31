@@ -37,7 +37,7 @@
             return indexes[Random.Next(indexes.Count)];
         }
 
-        public void Update(int number, int color)
+        public override void Update(int number, int color)
         {
 
             for (var i = 0; i < Subsequences.Count; i++)

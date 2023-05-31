@@ -1,29 +1,12 @@
 ﻿namespace GK.Strategy
 {
-    public class Strategy1 : IStrategy
+    public class Strategy1 : StrategyBase, IStrategy
     {
-        private readonly int _n;
-        private readonly int _k;
-        private readonly int _c;
-
-        protected Random Random { get; } = new();
-        protected List<int[]> Subsequences { get; }
-        protected List<int[]> T { get; }
-
-        public Strategy1(int n, int k, int c)
+        public Strategy1(int n, int k, int c) : base(n, k, c)
         {
-            _n = n;
-            _k = k;
-            _c = c;
-
-            Subsequences = Utility.GetAllSubsequences(n, k);
-
-            T = new List<int[]>();
-            for (var i = 0; i < Subsequences.Count; i++)
-                T.Add(new int[c + 1]);
         }
 
-        public (int number, int color) MakeMove(IReadOnlyList<int> numbers)
+        public override (int number, int color) MakeMove(IReadOnlyList<int> numbers)
         {
             var maxColoredCount = T.Select(x => x[_c]).Max();
             var maxColoredCountSubsequenceIndexes = T.Select((x, index) => (x, index)).Where(x => x.x[_c] == maxColoredCount).Select(x => x.index).ToList();
@@ -66,7 +49,7 @@
             return usedColors.Count == 0 ? 1 : usedColors[Random.Next(0, usedColors.Count)];
         }
 
-        public void Update(int number, int color)
+        public override void Update(int number, int color)
         {
             for (var i = 0; i < Subsequences.Count; i++)
             {
