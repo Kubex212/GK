@@ -1,11 +1,6 @@
 ﻿using GK;
+using GK.Strategy;
 
-//for (int i = 0; i < 15; i++)
-//{
-//    Console.ForegroundColor = (ConsoleColor)i;
-
-//    Console.WriteLine("Anty-van der Waerden\n");
-//}
 
 int n;
 int k;
@@ -58,13 +53,13 @@ while (true)
         // first strategy
         case "1":
         case "1)":
-            player2Strategy = new Strategy1Player2(n, k, c);
+            player2Strategy = new Strategy1(n, k, c);
             break;
 
         // second strategy
         case "2":
         case "2)":
-            player2Strategy = new Strategy2Player2(n, k, c);
+            player2Strategy = new Strategy2(n, k, c);
             break;
 
         // invalid input

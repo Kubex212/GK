@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GK.Strategy;
 
 namespace GK
 {
@@ -32,13 +28,6 @@ namespace GK
             this.c = c;
 
             this.player2Strategy = player2Strategy;
-
-            numbers = new int[n];
-            subsequences = Utility.GetAllSubsequences(n, k);
-
-            T = new List<int[]>();
-            for (var i = 0; i < subsequences.Count; i++)
-                T.Add(new int[c + 1]);
         }
 
         public void PlayHuman()
@@ -63,18 +52,8 @@ namespace GK
                         return;
                 }
                 catch (Exception) { }
-                
+
             }
-        }
-
-        private void Reset()
-        {
-            numbers = new int[n];
-            subsequences = Utility.GetAllSubsequences(n, k);
-
-            T = new List<int[]>();
-            for (var i = 0; i < subsequences.Count; i++)
-                T.Add(new int[c + 1]);
         }
 
         private MakeMoveResult MakeMove(IStrategy playingStrategy, int playingPlayer, bool demo, int? num = null, int? col = null)
