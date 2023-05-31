@@ -1,6 +1,4 @@
-﻿using GK.Strategy;
-
-namespace GK
+﻿namespace GK.Strategy
 {
     public abstract class StrategyBase : IStrategy
     {
@@ -26,6 +24,26 @@ namespace GK
         }
 
         public abstract (int number, int color) MakeMove(IReadOnlyList<int> numbers);
-        public abstract void Update(int number, int color);
+        public void Update(int number, int color)
+        {
+
+            for (var i = 0; i < Subsequences.Count; i++)
+            {
+                if (!Subsequences[i].Contains(number + 1))
+                    continue;
+
+                if (T[i][color - 1] == 1)
+                {
+                    T.RemoveAt(i);
+                    Subsequences.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    T[i][color - 1] = 1;
+                    T[i][_c]++;
+                }
+            }
+        }
     }
 }

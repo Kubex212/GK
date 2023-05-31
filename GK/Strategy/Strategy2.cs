@@ -26,7 +26,7 @@
 
             var maxSubsequence = FindMaxSubsequence();
             for (var i = 0; i < Subsequences.Count; i++)
-                if (T[i][_k] == maxSubsequence)
+                if (T[i][_c] == maxSubsequence)
                     foreach (var element in Subsequences[i])
                         if (numbers[element - 1] != 0)
                             colors[numbers[element - 1]]++;
@@ -37,28 +37,6 @@
             return indexes[Random.Next(indexes.Count)];
         }
 
-        public override void Update(int number, int color)
-        {
-
-            for (var i = 0; i < Subsequences.Count; i++)
-            {
-                if (!Subsequences[i].Contains(number + 1))
-                    continue;
-
-                if (T[i][color - 1] == 1)
-                {
-                    T.RemoveAt(i);
-                    Subsequences.RemoveAt(i);
-                    i--;
-                }
-                else
-                {
-                    T[i][color - 1] = 1;
-                    T[i][_c]++;
-                }
-            }
-        }
-
         protected void UpdateAArray(IReadOnlyList<int> numbers)
         {
             var max = FindMaxSubsequence();
@@ -66,7 +44,7 @@
 
             for (var i = 0; i < Subsequences.Count; i++)
             {
-                if (T[i][_k] != max)
+                if (T[i][_c] != max)
                     continue;
 
                 for (var j = 0; j < Subsequences[i].Length; j++)
@@ -83,7 +61,7 @@
                     _A[i] = -1;
         }
 
-        protected int FindMaxSubsequence() => T.Select(t => t[_k]).Max();
+        protected int FindMaxSubsequence() => T.Select(t => t[_c]).Max();
 
         protected int GetNumberToColor()
         {

@@ -28,7 +28,7 @@
             var subsequence = Subsequences[subsequenceIndex];
             for (var i = 0; i < _k; i++)
             {
-                if (i < _k && numbers[subsequence[i] - 1] == 0)
+                if (numbers[subsequence[i] - 1] == 0)
                     return (subsequence[i] - 1, color);
 
                 if (fringeIndex - i >= 0 && numbers[subsequence[fringeIndex - i] - 1] == 0)
@@ -49,25 +49,5 @@
             return usedColors.Count == 0 ? 1 : usedColors[Random.Next(0, usedColors.Count)];
         }
 
-        public override void Update(int number, int color)
-        {
-            for (var i = 0; i < Subsequences.Count; i++)
-            {
-                if (!Subsequences[i].Contains(number + 1))
-                    continue;
-
-                if (T[i][color - 1] == 1)
-                {
-                    T.RemoveAt(i);
-                    Subsequences.RemoveAt(i);
-                    i--;
-                }
-                else
-                {
-                    T[i][color - 1] = 1;
-                    T[i][_c]++;
-                }
-            }
-        }
     }
 }
