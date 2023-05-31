@@ -44,28 +44,23 @@ namespace GK
             {
                 try
                 {
-                    Console.Write("Ruch gracza 1. Wpisz ruch: {liczba} {kolor}\n");
+                    Console.Write("Player 1 turn. Please enter your move: [number] [color]\n");
                     var line = Console.ReadLine()!;
                     var num = int.Parse(line.Split()[0]);
                     var col = int.Parse(line.Split()[1]);
 
                     if (num < 1 || num > n)
                     {
-                        Console.WriteLine("Podaj poprawną liczbę od 1 do n.");
-                        throw new Exception("zla liczba");
+                        Console.WriteLine("Please enter a number from 1 to n.");
+                        throw new Exception("Incorrect number");
                     }
                     if (col < 1 || col > k)
                     {
-                        Console.WriteLine("Podaj poprawny kolor od 1 do k.");
-                        throw new Exception("zly kolor");
+                        Console.WriteLine("Please enter a color from 1 to k.");
+                        throw new Exception("Incorrect color");
                     }
 
                     MakeMove(null, player2Strategy, 1, true, num - 1, col);
-                    //ConsoleExtension.ClearLine();
-
-                    //Console.WriteLine("Ruch gracza 2.");
-                    //Console.ReadKey(true);
-                    //ConsoleExtension.ClearLine();
                     if (MakeMove(player2Strategy, null, 2, true) != MakeMoveResult.NoOneWon)
                         return;
                 }
@@ -105,7 +100,7 @@ namespace GK
             {
                 if (demo)
                 {
-                    Console.Write("Wygrana gracza 1.! Istnieje tęczowy podciąg arytmetyczny ");
+                    Console.Write("Player 1 wins. There exists a rainbow subsequence.");
 
                     var subsequence = subsequences[T.Select((x, index) => (x, index)).First(x => x.x[c] == k).index];
                     foreach (var element in subsequence)
@@ -126,7 +121,7 @@ namespace GK
             if (Player2Won())
             {
                 if (demo)
-                    Console.Write("Wygrana gracza 2.! Brak tęczowego podciagu arytmetycznego.");
+                    Console.Write("Player 2 wins. There is no rainbow subsequence.");
 
                 return MakeMoveResult.Player2Won;
             }
@@ -158,8 +153,8 @@ namespace GK
 
         private void DisplayMove(int player, int number, int color)
         {
-            Console.Write($"Gracz {player} pokolorował liczbę {number + 1} na kolor ");
-            Console.ForegroundColor = (ConsoleColor)color+1;
+            Console.Write($"Player {player} chose number {number + 1} and color ");
+            Console.ForegroundColor = (ConsoleColor)color;
             if ((ConsoleColor)color == ConsoleColor.DarkMagenta)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
